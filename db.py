@@ -7,42 +7,42 @@ class ProductsDB:
         self.query = Query()
         self.table = self.db.table('Products')
     
-    def all_products(self):
+    def all_products(self):         #1
         """Returns all products in the database"""
-        pass
+        return self.table.all()
     
-    def get_product_id(self, id):
+    def get_product_id(self, id):     #2
         """Returns all products by id"""
-        pass
+        return self.table.search(self.query.id == id)
     
-    def get_all_product_names(self):
+    def get_all_product_names(self):    #3
         """Returns all product names"""
-        pass
+        return [product['name'] for product in self.table.all() if 'name' in product]
 
-    def get_names(self, name: str):
+    def get_names(self, name: str):      #4
         """Returns all products by name"""
-        pass
+        return self.table.search(self.query.name == name)
 
-    def get_all_catagories(self):
+    def get_all_catagories(self):       #5
         """Returns all catagories name"""
-        pass
+        return [product['category'] for product in self.table.all() if 'category' in product]
     
-    def get_small_from_price(self, price):
+    def get_small_from_price(self, price):    #6
         """Returns products if product's price small from price"""
-        pass
+        return self.table.search(self.query.price < price)
 
-    def expensive_products(self):
+    def expensive_products(self):     #7
         """Returns a top three expensive products"""
-        pass
+        return self.table.search(self.query.price[::-3])
     
-    def get_between_price(self, max_price, min_price):
+    def get_between_price(self, max_price, min_price):     #8
         """Returns a products between max_price and min_price"""
-        pass
+        return self.table.search((self.query.price >= min_price) & (self.query.price <= max_price))
 
-    def add_product(self, product):
+    def add_product(self, product):    #9
         """Adds a product to the database"""
-        pass
+        return self.table.insert(product)
 
-    def delete_product(self, doc_id):
+    def delete_product(self, doc_id):    #10
         """Deletes a product from the database"""
-
+        return self.table.remove(doc_ids=[doc_id])
